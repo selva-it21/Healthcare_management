@@ -181,23 +181,24 @@
 												<ul>
 													{% comment %} <li><i class="far fa-thumbs-up"></i> 99%</li>
 													<li><i class="far fa-comment"></i> 35 Feedback</li> {% endcomment %}
-													<li><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</li>
+													<li><i class="fas fa-map-marker-alt"></i>Erode, Sathyamanagalam</li>
 												
 												</ul>
 											</div>
+											{% if user.is_authenticated and user.is_patient %}
 											<div class="doctor-action">
 												<a href="javascript:void(0)" class="btn btn-white fav-btn">
 													<i class="far fa-bookmark"></i>
 												</a>
-												<a href="chat.html" class="btn btn-white msg-btn">
+												<a href="#" class="btn btn-white msg-btn">
 													<i class="far fa-comment-alt"></i>
 												</a>
-												<a href="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
+												<a href="#" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
 													<i class="fas fa-phone"></i>
 												</a>
 												
 											</div>
-											
+											{% endif %}
 											<div class="clinic-booking">
 												<a class="apt-btn" href="{% url 'hospital-department-list' pk=hospitals.hospital_id %}">Department & Doctor List</a>
 											</div>

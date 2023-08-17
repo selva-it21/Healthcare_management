@@ -157,10 +157,10 @@ STORE_PASSWORD = env('STORE_PASSWORD')
 STORE_NAME = env('STORE_NAME')
 
 ###Mailtrap env Variables
-SMTP_HOST = env('SMTP_HOST')
-SMTP_PORT = env('SMTP_PORT')
-SMTP_USER = env('SMTP_USER')
-SMTP_PASSWORD = env('SMTP_PASSWORD')
+SMTP_HOST = 'sandbox.smtp.mailtrap.io'
+SMTP_PORT = 25
+SMTP_USER =  '04ea681d5dc1c5'
+SMTP_PASSWORD = '437400cb6540e5'
 
 # EMAIL
 
