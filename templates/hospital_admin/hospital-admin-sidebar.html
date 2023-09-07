@@ -1,3 +1,6 @@
+
+ 
+
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
@@ -38,17 +41,24 @@
                 </li>
 
                 <li class="submenu">
-                    <a href="#"><i class="fe fe-user"></i> <span> Pharmacist</span></a>
+                    <a href="#"><i class="fe fe-user"></i>
+                        <span> Pharmacist</span></a>
                     <ul style="display:none;">
                         <li><a href="{% url 'add-pharmacist' %}"><i class="fe fe-user-plus"></i> <span>Add Pharmacist</span></a></li>
                         
                         <li><a href="{%url 'pharmacist-list'%}"><i class="fe fe-users"></i> <span>View Pharmacist</span></a></li>
                     </ul>
                 </li>
-                
+                  <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i><span> Download Data</span></a> <ul style="display:none;">
+                        <li><a href="http://127.0.0.1:8000/export-csv"><i class="fe fe-document"></i> <span>User data</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/appointment-csv"><i class="fe fe-document"></i> <span>Appointment data</span></a></li>
+                        <li><a href="http://127.0.0.1:8000/patient-csv"><i class="fe fe-document"></i> <span>Patient data</span></a></li>
+                    </ul>
+                </li>
                 {% comment %} <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Reports</span></a>
-                    <ul style="display: none;">
+                    <ul >
                         <li><a href="invoice-report.html">Invoice Reports</a></li>
                     </ul>
                 </li> {% endcomment %}

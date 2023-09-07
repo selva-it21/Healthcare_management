@@ -33,8 +33,8 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['192.168.0.100', '127.0.0.1','5749-103-109-53-5.in.ngrok.io']
-# ALLOWED_HOSTS = ['mobile view', 'local host','ngrok -- keeps on changing']
+ALLOWED_HOSTS = ['localhost','192.168.43.240','10.10.173.46','10.10.69.48','192.168.0.100', '127.0.0.1','5749-103-109-53-5.in.ngrok.io']
+# ALLOWED_HOSTS = ['mobile view', 'local host','ngrok -- keeps on changing' '10.10.165.219',]
 
 # Application definition
 
@@ -54,9 +54,39 @@ INSTALLED_APPS = [
     'rest_framework',
     'ChatApp.apps.ChatappConfig',
     'debug_toolbar',
+    'import_export',
+    'social_django',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',  
  
 
 ]
+# settings.py
+ 
+
+AUTHENTICATION_BACKENDS = (
+    # ...
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '355601417745-grflidr6cisd6tfk09crha1nc3slfnrd.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+
+
+AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_QUERY_EMAIL = True
+LOGIN_REDIRECT_URL = '/'
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -163,9 +193,9 @@ SMTP_USER =  '04ea681d5dc1c5'
 SMTP_PASSWORD = '437400cb6540e5'
 
 # EMAIL
-
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST = SMTP_HOST
 EMAIL_PORT = SMTP_PORT
 EMAIL_HOST_USER = SMTP_USER
 EMAIL_HOST_PASSWORD = SMTP_PASSWORD

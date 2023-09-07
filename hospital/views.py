@@ -33,7 +33,9 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views.decorators.csrf import csrf_exempt
-
+import csv
+from django.http import HttpResponse
+from hospital.models import User 
 
 # Create your views here.
 @csrf_exempt
@@ -721,3 +723,60 @@ def got_offline(sender, user, request, **kwargs):
     
 
 
+def export_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    # Query the data from the database
+    queryset = User.objects.all()  # Replace with your actual model and filtering if needed
+
+    # Create a CSV writer and write header row
+    csv_writer = csv.writer(response)
+    header = [field.name for field in User._meta.fields]  # Use field names as CSV header
+    csv_writer.writerow(header)
+
+    # Write data rows
+    for obj in queryset:
+        row = [getattr(obj, field) for field in header]
+        csv_writer.writerow(row)
+
+    return response
+
+def Appointment_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    # Query the data from the database
+    queryset = Appointment.objects.all()  # Replace with your actual model and filtering if needed
+
+    # Create a CSV writer and write header row
+    csv_writer = csv.writer(response)
+    header = [field.name for field in Appointment._meta.fields]  # Use field names as CSV header
+    csv_writer.writerow(header)
+
+    # Write data rows
+    for obj in queryset:
+        row = [getattr(obj, field) for field in header]
+        csv_writer.writerow(row)
+
+    return response
+
+
+def Patient_to_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    # Query the data from the database
+    queryset = Patient.objects.all()  # Replace with your actual model and filtering if needed
+
+    # Create a CSV writer and write header row
+    csv_writer = csv.writer(response)
+    header = [field.name for field in Patient._meta.fields]  # Use field names as CSV header
+    csv_writer.writerow(header)
+
+    # Write data rows
+    for obj in queryset:
+        row = [getattr(obj, field) for field in header]
+        csv_writer.writerow(row)
+
+    return response

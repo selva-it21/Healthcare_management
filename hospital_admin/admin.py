@@ -1,5 +1,6 @@
 from django.contrib import admin
-
+from import_export.admin import ImportExportActionModelAdmin
+from . import models
 # Register your models here.
 from .models import Admin_Information, Clinical_Laboratory_Technician, hospital_department, specialization, service ,Test_Information
 

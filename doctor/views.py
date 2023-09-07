@@ -238,7 +238,7 @@ def reject_appointment(request, pk):
     appointment = Appointment.objects.get(id=pk)
     appointment.appointment_status = 'cancelled'
     appointment.save()
-    
+
     # Mailtrap
     
     patient_email = appointment.patient.email

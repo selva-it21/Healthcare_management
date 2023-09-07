@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from .pres_pdf import prescription_pdf
-
+from django.contrib.auth import views as auth_views
 # from . --> same directory
 # Views functions and urls must be linked. # of views == # of urls
 # App URL file - urls related to hospital
@@ -46,6 +46,8 @@ urlpatterns = [
     path('test-add-to-cart/<int:pk>/<int:pk2>/', views.test_add_to_cart, name='test-add-to-cart'),
     path('delete-prescription/<int:pk>/', views.delete_prescription, name='delete-prescription'),
     path('delete-report/<int:pk>/', views.delete_report, name='delete-report'),
+    path('social-auth/', include('social_django.urls', namespace='social')),
+    
 
 ]
 

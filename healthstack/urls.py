@@ -14,6 +14,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 from django.conf import settings
 from django.conf.urls.static import static
 from hospital import views
@@ -37,16 +38,25 @@ urlpatterns = [
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     
-    
+    # myapp/urls.py
+
+
+    # Other URL patterns
+    path('export-csv/', views.export_to_csv, name='export_csv'),
+    path('appointment-csv/', views.Appointment_to_csv, name='appointment_csv'),
+    path('patient-csv/', views.Patient_to_csv, name='patient_csv'),
     # For forgot password views and reset password views
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html"),name="reset-password"),
     # path('reset_password/', auth_views.PasswordResetView.as_view(),name="reset-password"),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),name="password_reset_complete"),
-    
+     path('social-auth/', include('social_django.urls', namespace='social')),
+     
 ]
 
+
+ 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
