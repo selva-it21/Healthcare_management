@@ -72,8 +72,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '355601417745-grflidr6cisd6tfk09crha1nc3slfnrd.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'PASSWORD'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'YOUR_SECRET_KEY'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
@@ -189,8 +189,8 @@ STORE_NAME = env('STORE_NAME')
 ###Mailtrap env Variables
 SMTP_HOST = 'sandbox.smtp.mailtrap.io'
 SMTP_PORT = 25
-SMTP_USER =  '04ea681d5dc1c5'
-SMTP_PASSWORD = '437400cb6540e5'
+SMTP_USER =  'USER'
+SMTP_PASSWORD = 'PASSWORD'
 
 # EMAIL
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
