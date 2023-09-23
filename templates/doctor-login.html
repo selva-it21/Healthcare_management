@@ -1,4 +1,6 @@
 {% load static %}
+ 
+
 <!DOCTYPE html>
 <html lang="en">
   <!-- doccure/login.html  30 Nov 2019 04:12:20 GMT -->
@@ -119,22 +121,22 @@
                       >
                         Login
                       </button>
-                      <!-- <div class="login-or">
+                      <div class="login-or">
                         <span class="or-line"></span>
                         <span class="span-or">or</span>
-                      </div> -->
-                      <!-- <div class="row form-row social-login">
+                      </div>
+                      <div class="row form-row social-login">
                         <div class="col-6">
                           <a href="#" class="btn btn-facebook btn-block"
                             ><i class="fab fa-facebook-f mr-1"></i> Login</a
                           >
                         </div>
                         <div class="col-6">
-                          <a href="#" class="btn btn-google btn-block"
+                          <a href="{% url 'google_login_with_role' 'doctor' %}" class="btn btn-google btn-block"
                             ><i class="fab fa-google mr-1"></i> Login</a
                           >
                         </div>
-                      </div> -->
+                      </div>
                       <div class="text-center dont-have">
                         Don't have an account?
                         <a href="{% url 'doctor-register' %}" style="text-decoration: none;">Register</a>

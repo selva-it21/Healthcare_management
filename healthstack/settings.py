@@ -33,7 +33,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['localhost','192.168.43.240','10.10.173.46','10.10.69.48','192.168.0.100', '127.0.0.1','5749-103-109-53-5.in.ngrok.io']
+ALLOWED_HOSTS = ['localhost', '10.10.223.105','127.0.0.1','5749-103-109-53-5.in.ngrok.io','192.168.167.87','192.168.43.240']
 # ALLOWED_HOSTS = ['mobile view', 'local host','ngrok -- keeps on changing' '10.10.165.219',]
 
 # Application definition
@@ -53,39 +53,66 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'rest_framework',
     'ChatApp.apps.ChatappConfig',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'import_export',
     'social_django',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',  
+    'crispy_forms',
  
 
 ]
 # settings.py
+#ACCOUNT_LOGOUT_ON_GET=True
+CRISPY_TEMPLATE_PACK = 'bootstrap'
  
-
 AUTHENTICATION_BACKENDS = (
     # ...
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '355601417745-grflidr6cisd6tfk09crha1nc3slfnrd.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+AUTHENTICATION_CLASSES=(
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1038052439509-a622hajv9mmgl2otuli2i4qml6e61a8b.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
 
 
 AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_LOGOUT_ON_GET = True
 SOCIALACCOUNT_QUERY_EMAIL = True
-LOGIN_REDIRECT_URL = '/'
+ 
 
+# Django-allauth settings
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+SOCIALACCOUNT_AUTO_SIGNUP = True
+ 
+SOCIALACCOUNT_LOGIN_ON_GET =True
+ 
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# Google OAuth2 settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+
+    }
+}
 
 
 MIDDLEWARE = [
@@ -96,8 +123,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -189,8 +219,8 @@ STORE_NAME = env('STORE_NAME')
 ###Mailtrap env Variables
 SMTP_HOST = 'sandbox.smtp.mailtrap.io'
 SMTP_PORT = 25
-SMTP_USER =  '04ea681d5dc1c5'
-SMTP_PASSWORD = '437400cb6540e5'
+SMTP_USER =  '942729e32b9c71'
+SMTP_PASSWORD = 'c679e4f489d6d6'
 
 # EMAIL
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

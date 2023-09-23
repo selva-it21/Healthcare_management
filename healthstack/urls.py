@@ -14,11 +14,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
 from hospital import views
-
 # For forgot password views and reset password views
 from django.contrib.auth import views as auth_views
 
@@ -37,22 +35,30 @@ urlpatterns = [
     path('sslcommerz/', include('sslcommerz.urls')),
     path('pharmacy/', include('pharmacy.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
+
+    path('google-login/<str:role>/', views.google_login_with_role, name='google_login_with_role'),
+    path('google-callback/<str:role>/', views.google_callback_with_role, name='google_callback_with_role'),
+    path('accounts/', include('allauth.urls')),
+    path('social/', include(('allauth.socialaccount.urls', 'socialaccount'), namespace='socialaccount')),
     
+    # For forgot password views and reset password views
+    # path('reset_password/', auth_views.PasswordResetView.as_view(),name="reset-password"),
+    #path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     # myapp/urls.py
-
-
     # Other URL patterns
+
     path('export-csv/', views.export_to_csv, name='export_csv'),
     path('appointment-csv/', views.Appointment_to_csv, name='appointment_csv'),
     path('patient-csv/', views.Patient_to_csv, name='patient_csv'),
-    # For forgot password views and reset password views
+   
     path('reset_password/', auth_views.PasswordResetView.as_view(template_name="reset_password.html"),name="reset-password"),
-    # path('reset_password/', auth_views.PasswordResetView.as_view(),name="reset-password"),
+   
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="reset_password_sent.html"),name="password_reset_done"),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="reset.html"),name="password_reset_confirm"),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="reset_password_complete.html"),name="password_reset_complete"),
-     path('social-auth/', include('social_django.urls', namespace='social')),
-     
+    path('social-auth/', include('social_django.urls', namespace='social')),
+    
+
 ]
 
 

@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
   <!-- doccure/register.html  30 Nov 2019 04:12:20 GMT -->
@@ -119,7 +120,7 @@
                           >
                         </div>
                         <div class="col-6">
-                          <a href="#" class="btn btn-google btn-block"
+                           <a href="{% url 'google_login_with_role' 'patient' %}" class="btn btn-google btn-block"
                             ><i class="fab fa-google mr-1"></i> Login</a
                           >
                         </div>

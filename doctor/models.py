@@ -7,7 +7,6 @@ from hospital.models import Hospital_Information, User, Patient
 from hospital_admin.models import hospital_department, specialization, service
 from django.conf import settings
 
-
 # # Create your models here.
 
 """
@@ -45,6 +44,11 @@ class Doctor_Information(models.Model):
 
     featured_image = models.ImageField(upload_to='doctors/', default='doctors/user-default.png', null=True, blank=True)
     certificate_image = models.ImageField(upload_to='doctors_certificate/', default='doctors_certificate/default.png', null=True, blank=True)
+    qr_image = models.ImageField(upload_to='doctors_qr/', default='doctors_qr/usr-default.png', null=True, blank=True)
+
+   
+
+
 
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_number = models.CharField(max_length=200, null=True, blank=True)
@@ -181,8 +185,11 @@ class Prescription(models.Model):
     test_description = models.TextField(null=True, blank=True)
     extra_information = models.TextField(null=True, blank=True)
 
-    def __str__(self):
-        return str(self.patient.username)
+def __str__(self):
+    if self.user is not None:
+        return str(self.user.username)
+    else:
+        return "No User"  # or any default value you prefer
 
 class Prescription_medicine(models.Model):
     prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE, null=True, blank=True)

@@ -125,13 +125,13 @@
                           {% endif %}
                         </h5>
                         <h5 class="mb-0">
-                          <i class="fas fa-phone"></i> +880{{app.patient.phone_number}}
+                          <i class="fas fa-phone"></i> +91 {{app.patient.phone_number}}
                         </h5>
                       </div>
                     </div>
                   </div>
                   <div class="appointment-action">
-                    <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details"><i class="far fa-eye"></i> View</a>
+                    <!-- <a href="#" class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details"><i class="far fa-eye"></i> View</a> -->
                     <a href="{% url 'accept-appointment' pk=app.id %}" onclick="return confirm('Accept appointment?');" class="btn btn-sm bg-success-light"><i class="fas fa-check"></i> Accept</a>
                     <a href="{% url 'reject-appointment' pk=app.id %}" onclick="return confirm('Reject Appointment?');" class="btn btn-sm bg-danger-light"><i class="fas fa-times"></i> Reject</a>
                   </div>
@@ -157,7 +157,7 @@
     <!-- /Main Wrapper -->
 
     <!-- Appointment Details Modal -->
-    <div class="modal fade custom-modal" id="appt_details">
+    <!-- <div class="modal fade custom-modal" id="appt_details">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -203,14 +203,14 @@
                 <span class="text">29 Jun 2019</span>
               </li>
               <li>
-                <span class="title">Paid Amount</span>
+                <span class="title">Amount</span>
                 <span class="text">$450</span>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- /Appointment Details Modal -->
 
     <!-- jQuery -->

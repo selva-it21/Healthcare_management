@@ -218,7 +218,7 @@
                                             src="{{appointment.patient.featured_image.url}}"
                                             alt="User Image"
                                         /></a>
-                                        <a href="patient-profile.html">{{appointment.patient.name}}<span>#PT{{appointment.serial_number}}</span></a>
+                                        <a href="patient-profile.html">{{appointment.patient.name}}<span>#P-ID{{appointment.serial_number}}</span></a>
                                       </h2>
                                     </td>
                                     <td>
@@ -311,7 +311,7 @@
                                             src="{{ today.patient.featured_image.url }}"
                                             alt="User Image"
                                         /></a>
-                                        <a href="#patient-profile.html">{{today.patient.name}}<span>#PT{{today.serial_number}}</span></a>
+                                        <a href="#">{{today.patient.name}}<span>#PID : {{today.serial_number}}</span></a>
                                       </h2>
                                     </td>
                                     <td>{{today.date}}<span class="d-block text-info">{{today.time}}</span></td>
@@ -319,7 +319,7 @@
                                     <td>
                                       {{today.patient.email}}
                                       <span class="d-block text-info"
-                                        >+880{{today.patient.phone_number}}</span
+                                        >+91 {{today.patient.phone_number}}</span
                                       >
                                     </td>
                                     <td>
@@ -329,6 +329,10 @@
                                       {% if today.appointment_status == 'confirmed' %}
                                       <span class="badge badge-pill bg-success-light">Confirmed</span>
                                       {% endif %}
+                                      {% if today.appointment_status == 'cancelled' %}
+                                      <span class="badge badge-pill bg-warning-light">cancelled</span>
+                                      {% endif %}
+                                      
                                     </td>
                                   
                                   </tr>

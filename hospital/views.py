@@ -36,8 +36,130 @@ from django.views.decorators.csrf import csrf_exempt
 import csv
 from django.http import HttpResponse
 from hospital.models import User 
+from django.urls import reverse
+from urllib.parse import urlencode
+from allauth.socialaccount.models import SocialAccount
+import re
 
+from django.http import HttpResponse 
+from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect
+from allauth.socialaccount.providers.oauth2.client import OAuth2Error
+
+
+# @login_required
+# @csrf_exempt
+# def google_login_with_role(request, role):
+#     # Construct the URL for Google login with the role query parameter
+#     redirect_uri = request.build_absolute_uri(reverse('google_callback_with_role', args=[role]))
+    
+#     # Manually construct the Google login URL
+#     google_login_url = "https://accounts.google.com/o/oauth2/auth?"
+#     google_login_url += urlencode({
+#         'client_id': '1038052439509-a622hajv9mmgl2otuli2i4qml6e61a8b.apps.googleusercontent.com',  # Replace with your actual client ID
+#         'redirect_uri': redirect_uri,
+#         'scope': 'openid email',  # Adjust the scope as needed
+#         'response_type': 'code',
+#         'state': role,  # Pass the 'role' as 'state' parameter
+#     })
+
+#     return redirect(google_login_url)
+
+# # Your view function definition
+# def google_callback_with_role(request, role):
+#     # Ensure the user is authenticated
+#     if not request.user.is_authenticated:
+#         return HttpResponse("User is not authenticated", status=500)  # Use HttpResponse with status code 500
+
+#     try:
+#         # Check if the user registered via Google
+#         social_account = SocialAccount.objects.get(user=request.user, provider='google')
+        
+#         if role == 'patient':
+#             # Check if a Patient record already exists for the user
+#             patient, created = Patient.objects.get_or_create(user=request.user)
+#             if created:
+#                 # Optionally, set other fields of the Patient model if needed
+#                 patient.name = request.user.username  # You can customize this
+#                 patient.save()
+#             request.user.is_patient = True
+#             request.user.save()
+
+#     except SocialAccount.DoesNotExist:
+#         pass  # User did not register via Google
+
+#     return redirect('patient-dashboard')
 # Create your views here.
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile(request):
+    user = request.user
+    username = user.username
+    email = user.email
+
+    # Render the profile template with the username and email
+    return render(request, 'patient-dashboard.html', {'username': username, 'email': email})
+
+@login_required
+@csrf_exempt
+def google_login_with_role(request, role):
+    # Construct the URL for Google login with the role query parameter
+    redirect_uri = request.build_absolute_uri(reverse('google_callback_with_role', args=[role]))
+
+    # Manually construct the Google login URL
+    google_login_url = "https://accounts.google.com/o/oauth2/auth?"
+    google_login_url += urlencode({
+        'client_id': '1038052439509-a622hajv9mmgl2otuli2i4qml6e61a8b.apps.googleusercontent.com',  # Replace with your actual client ID
+        'redirect_uri': redirect_uri,
+        'scope': 'openid email',  # Adjust the scope as needed
+        'response_type': 'code',
+        'state': role,  # Pass the 'role' as 'state' parameter
+    })
+
+    return redirect(google_login_url)
+
+def google_callback_with_role(request, role):
+    # Ensure the user is authenticated
+    if not request.user.is_authenticated:
+        return HttpResponse("User is not authenticated", status=500)
+
+    try:
+        # Check if the user registered via Google
+        social_account: SocialAccount = SocialAccount.objects.get(user=request.user, provider='google')
+
+        if role == 'patient':
+            # Check if a Patient record already exists for the user
+            patient, created = Patient.objects.get_or_create(user=request.user)
+            if created:
+                # Optionally, set other fields of the Patient model if needed
+                patient.name = request.user.username
+                patient.save()
+            request.user.is_patient = True
+            request.user.save()
+            # Redirect to the patient dashboard
+            return redirect('patient-dashboard')  # Adjust the URL name as needed
+
+        elif role == 'doctor':
+            # Check if a Doctor record already exists for the user
+            doctor, created = Doctor_Information.objects.get_or_create(user=request.user)
+            if created:
+                # Optionally, set other fields of the Doctor model if needed
+                doctor.name = request.user.username
+                doctor.save()
+            request.user.is_doctor = True
+            request.user.save()
+            # Redirect to the doctor dashboard
+            return redirect('doctor-dashboard')  # Adjust the URL name as needed
+
+        else:
+            return HttpResponse("Invalid role specified", status=400)
+
+    except SocialAccount.DoesNotExist:
+        # Handle the case where the user did not register via Google
+        return HttpResponse("User did not register via Google", status=500)
+
 @csrf_exempt
 def hospital_home(request):
     # .order_by('-created_at')[:6]
