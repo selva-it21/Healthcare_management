@@ -75,6 +75,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+<<<<<<< HEAD
 AUTHENTICATION_CLASSES=(
     'allauth.account.auth_backends.AuthenticationBackend',
 
@@ -83,6 +84,12 @@ AUTHENTICATION_CLASSES=(
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1038052439509-a622hajv9mmgl2otuli2i4qml6e61a8b.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
+=======
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'PASSWORD'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'YOUR_SECRET_KEY'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+>>>>>>> de06ac900f32b2d78e6ea24e69244f2fa9b12a5c
 
 
 AUTHENTICATION_METHOD = 'email'
@@ -219,8 +226,13 @@ STORE_NAME = env('STORE_NAME')
 ###Mailtrap env Variables
 SMTP_HOST = 'sandbox.smtp.mailtrap.io'
 SMTP_PORT = 25
+<<<<<<< HEAD
 SMTP_USER =  '942729e32b9c71'
 SMTP_PASSWORD = 'c679e4f489d6d6'
+=======
+SMTP_USER =  'USER'
+SMTP_PASSWORD = 'PASSWORD'
+>>>>>>> de06ac900f32b2d78e6ea24e69244f2fa9b12a5c
 
 # EMAIL
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
